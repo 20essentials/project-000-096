@@ -1,13 +1,4 @@
-console.group("Reference");
-console.log(
-  "Vector Background: ",
-  "https://www.vecteezy.com/vector-art/1918387-ornament-vector-seamless-pattern-modern-stylish-texture-repeating-geometric-square-grid-simple-graphic-design-trendy-hipster-sacred-geometry"
-);
-console.log(
-  "Card Rotation Effect:  ",
-  "https://youtu.be/dHN5pP-OCog?si=z4dEiPh1ikfKS_iS"
-);
-console.groupEnd();
+
 
 const d = document;
 const $ = (el) => d.querySelector(el);
