@@ -1,25 +1,14 @@
-console.group("Reference");
-console.log(
-  "Vector Background: ",
-  "https://www.vecteezy.com/vector-art/1918387-ornament-vector-seamless-pattern-modern-stylish-texture-repeating-geometric-square-grid-simple-graphic-design-trendy-hipster-sacred-geometry"
-);
-console.log(
-  "Card Rotation Effect:  ",
-  "https://youtu.be/dHN5pP-OCog?si=z4dEiPh1ikfKS_iS"
-);
-console.groupEnd();
-
 const d = document;
-const $ = (el) => d.querySelector(el);
+const $ = el => d.querySelector(el);
 
 /*************************** HEADER ANIMATION ***************************/
 
 const updateHeader = () => {
-  let $header = $(".am-header-wrap");
-  $header.classList.add("active");
+  let $header = $('.am-header-wrap');
+  $header.classList.add('active');
 };
 
-d.addEventListener("DOMContentLoaded", (e) => {
+d.addEventListener('DOMContentLoaded', e => {
   updateHeader();
 });
 
@@ -28,8 +17,8 @@ class CardWrapper extends HTMLElement {
   #img = null;
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    this.classList.add("wrapper");
+    this.attachShadow({ mode: 'open' });
+    this.classList.add('wrapper');
   }
 
   get style() {
@@ -81,8 +70,8 @@ class CardWrapper extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#img = this.getAttribute("data-img");
-    this.classList.add("wrapper");
+    this.#img = this.getAttribute('data-img');
+    this.classList.add('wrapper');
     this.shadowRoot.innerHTML = `
       <style>${this.style}</style>
       <aside class="am-card">
@@ -92,24 +81,24 @@ class CardWrapper extends HTMLElement {
   }
 }
 
-customElements.define("the-card", CardWrapper);
+customElements.define('the-card', CardWrapper);
 
 /*************************** CARD ANIMATION DESKTOP ***************************/
 
 function moveCard(e) {
-  if (e.target.matches(".wrapper")) {
-    const { width, height } = $(".wrapper").getBoundingClientRect();
+  if (e.target.matches('.wrapper')) {
+    const { width, height } = $('.wrapper').getBoundingClientRect();
     const halfWidth = width / 2;
     const halfHeight = height / 2;
 
     let { offsetX, offsetY } = e;
 
-    e.target.shadowRoot.querySelector("img").style.transition = "none";
+    e.target.shadowRoot.querySelector('img').style.transition = 'none';
 
     let rotationX = ((offsetX - halfWidth) / halfWidth) * 30;
     let rotationY = ((offsetY - halfHeight) / halfHeight) * 30;
 
-    e.target.shadowRoot.querySelector("img").style.transform = `
+    e.target.shadowRoot.querySelector('img').style.transform = `
     rotateX(${rotationX}deg)
     rotateY(${rotationY}deg)
     `;
@@ -118,27 +107,27 @@ function moveCard(e) {
 }
 
 function moveCardFinish(e) {
-  if (e.target.matches(".wrapper")) {
-    e.target.shadowRoot.querySelector("img").style.transition = "2s ease";
-    e.target.shadowRoot.querySelector("img").style.transform = `
+  if (e.target.matches('.wrapper')) {
+    e.target.shadowRoot.querySelector('img').style.transition = '2s ease';
+    e.target.shadowRoot.querySelector('img').style.transform = `
     rotateX(0deg)
     rotateY(0deg)`;
     return;
   }
 }
 
-d.addEventListener("mousemove", moveCard);
+d.addEventListener('mousemove', moveCard);
 
-d.addEventListener("mouseout", moveCardFinish);
+d.addEventListener('mouseout', moveCardFinish);
 
 /*************************** CARD ANIMATION MOBILE ***************************/
 
 d.addEventListener(
-  "touchmove",
-  (e) => {
-    if (e.target.matches(".wrapper")) {
-      d.removeEventListener("mousemove", moveCard);
-      d.removeEventListener("mouseout", moveCardFinish);
+  'touchmove',
+  e => {
+    if (e.target.matches('.wrapper')) {
+      d.removeEventListener('mousemove', moveCard);
+      d.removeEventListener('mouseout', moveCardFinish);
     }
   },
   { passive: true }
